@@ -23,46 +23,21 @@ export default function App(){
 
 }*/
 
-import React, { useEffect, useState } from "react";
-import clsx from "clsx";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import React, { useEffect} from "react";
+import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import {
   createStyles,
   makeStyles,
-  useTheme,
   Theme,
 } from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import List from "@material-ui/core/List";
+
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import Button from "@material-ui/core/Button";
-
-import HomeIcon from "@material-ui/icons/Home";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-//import YouTubeIcon from "@material-ui/icons/YouTube";
-import MedicationIcon from '@mui/icons-material/Medication';
-import NoteAltIcon from '@mui/icons-material/NoteAlt';
-
 import Home from "./components/Home";
 import Pharmacists from "./components/Pharmacists";
 import PharmacistCreate from "./components/PharmacistCreate";
 import MedRecs from "./components/MedRecs";
 import MedRecCreate from "./components/MedRecCreate";
 import SignIn from "./components/SignIn";
-
-import { SigninInterface } from "./models/ISignin";
-import { tokenToString } from "typescript";
 import Navbar from "./components/Navbar";
 
 const drawerWidth = 240;
@@ -179,7 +154,7 @@ export default function MiniDrawer() {
               />
             </Switch>
           </div>
-        </main>
+          </main>
         </>
         )}
 

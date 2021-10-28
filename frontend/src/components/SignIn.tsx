@@ -9,20 +9,21 @@ import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-
+import { createTheme,ThemeProvider } from "@material-ui/core";
 import { SigninInterface } from "../models/ISignin";
-import { id } from "date-fns/locale";
 
 function Alert(props: AlertProps) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
 const useStyles = makeStyles((theme) => ({
+
   paper: {
     marginTop: theme.spacing(8),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    
   },
   avatar: {
     margin: theme.spacing(1),
@@ -35,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  
 }));
 
 function SignIn() {
@@ -81,9 +83,11 @@ function SignIn() {
     setError(false);
   };
   
+  
  
   return (
-    <Container component="main" maxWidth="xs">
+    
+    <Container component="main" maxWidth="xs" >
       <Snackbar open={success} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success">
           เข้าสู่ระบบสำเร็จ
@@ -96,14 +100,16 @@ function SignIn() {
       </Snackbar>
       <CssBaseline />
       <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
+        {/*<Avatar className={classes.avatar}>
+        
           <LockOutlinedIcon />
-        </Avatar>
+        </Avatar>*/}
+        <img src="/img/med-jar.png" width="50px"></img>
         <Typography component="h1" variant="h5">
           Sign in
-
+          
         </Typography>
-        *username:1400011111111, password:123456*
+        hint : *Pid:1400011111111, Password:123456*
         <form className={classes.form} noValidate>
           <TextField
             variant="outlined"
@@ -143,6 +149,7 @@ function SignIn() {
         </form>
       </div>
     </Container>
+    
   );
 }
 

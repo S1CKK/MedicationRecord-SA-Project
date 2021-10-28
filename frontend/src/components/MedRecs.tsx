@@ -77,6 +77,7 @@ function MedRecs() {
           <Box>
             <Button
               component={RouterLink}
+              style={{backgroundColor:"#626567"}}
               to="/medication_record/create"
               variant="contained"
               color="primary"
@@ -114,7 +115,7 @@ function MedRecs() {
                 <TableRow key={item.ID}>
                   <TableCell align="center">{item.ID}</TableCell>
                   <TableCell align="center">{item.Pharma.Name}</TableCell>
-                  <TableCell align="center">{item.TreatmentID}</TableCell>
+                  <TableCell align="center">{item.TreatmentID}  {item.AdmissionID} {item.Treatment.Admission.Patient_Name}</TableCell>
                   <TableCell align="center">{item.Med.Name}</TableCell>
                   <TableCell align="center">{item.Amount}</TableCell>
                   <TableCell align="center">{format((new Date(item.RecordTime)), 'dd MMMM yyyy hh:mm a')}</TableCell>

@@ -20,5 +20,6 @@ type TreatmentRecord struct {
 	AdmissionID *uint
 	Admission   Admission
 
+	MedicationRecord  []MedicationRecord `gorm:"foreignKey:AdmissionID"`
 	MedicationRecords []MedicationRecord `gorm:"foreignKey:TreatmentID"`
 }

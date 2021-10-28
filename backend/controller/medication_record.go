@@ -13,7 +13,6 @@ func CreateMedicationRecord(c *gin.Context) {
 	var medicationrecord entity.MedicationRecord
 	var pharmacist entity.Pharmacist
 	var treatmentrecord entity.TreatmentRecord
-	//var admission entity.Admission
 	var medicine entity.Medicine
 
 	// ผลลัพธ์ที่ได้จากขั้นตอนที่ 8 จะถูก bind เข้าตัวแปร medicationrecord
@@ -21,6 +20,7 @@ func CreateMedicationRecord(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
+
 	// ค้นหา pharmacist ด้วย id
 	if tx := entity.DB().Where("id = ?", medicationrecord.PharmaID).First(&pharmacist); tx.RowsAffected == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "pharmacist not found"})
@@ -41,12 +41,12 @@ func CreateMedicationRecord(c *gin.Context) {
 
 	// 11: สร้าง MedicationRecord
 	mr := entity.MedicationRecord{
-		Pharma:     pharmacist,                  // โยงความสัมพันธ์กับ Entity Pharmacist
-		Med:        medicine,                    // โยงความสัมพันธ์กับ Entity Medicine
-		Treatment:  treatmentrecord,             // โยงความสัมพันธ์กับ Entity TreatmentRecord
-		Amount:     medicationrecord.Amount,     // ตั้งค่า Amount
-		RecordTime: medicationrecord.RecordTime, // ตั้งค่า RecordTime
-
+		Pharma:      pharmacist,                  // โยงความสัมพันธ์กับ Entity Pharmacist
+		Med:         medicine,                    // โยงความสัมพันธ์กับ Entity Medicine
+		Treatment:   treatmentrecord,             // โยงความสัมพันธ์กับ Entity TreatmentRecord
+		Amount:      medicationrecord.Amount,     // ตั้งค่า Amount
+		RecordTime:  medicationrecord.RecordTime, // ตั้งค่า RecordTime
+		AdmissionID: treatmentrecord.AdmissionID,
 	}
 
 	// 12: บันทึก
@@ -68,10 +68,29 @@ func GetMedicationRacord(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": medicationrecord})
 }
 
+/*
 // GET /medication_records
 func ListMedicationRacord(c *gin.Context) {
 	var medicationrecord []entity.MedicationRecord
+	var treatment []entity.TreatmentRecord
+
+	if err := entity.DB().Joins("Admission").
+		Find(&treatment).Where("").Error; err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "admission not found"})
+		return
+	}
 	if err := entity.DB().Preload("Treatment").Preload("Med").Preload("Pharma").Raw("SELECT * FROM medication_records").Find(&medicationrecord).Error; err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"data": medicationrecord})
+}*/
+
+// GET /medication_records
+func ListMedicationRacord(c *gin.Context) {
+	var medicationrecord []entity.MedicationRecord
+	if err := entity.DB().Preload("Treatment").Preload("Med").Preload("Pharma").Preload("Treatment.Admission").Raw("SELECT * FROM medication_records").Find(&medicationrecord).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}

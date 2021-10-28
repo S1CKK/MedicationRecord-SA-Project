@@ -227,9 +227,10 @@ function MedRecCreate() {
       PharmaID: convertType(pharmacists?.ID),
       TreatmentID: convertType(medRecord.TreatmentID),
       MedID: convertType(medRecord.MedID),
-      AdmissionID: convertType(medRecord.AdmissionID),
+     // AdmissionID: convertType(medRecord.AdmissionID),
       RecordTime: selectedDate,
       Amount:  convertType(medRecord.Amount ?? ""),
+      AdmissionID: convertType(medRecord.Treatment?.Admission.PatientID),
     };
 
     console.log(data)
@@ -285,7 +286,7 @@ function MedRecCreate() {
         <Grid container spacing={3} className={classes.root}>
         <Grid item xs={6}>
             <FormControl fullWidth variant="outlined">
-              <p>ผู้บันทึก</p>
+              <p>ผู้จ่ายยา</p>
               <Select
                 native
                 disabled
@@ -352,6 +353,7 @@ function MedRecCreate() {
           <FormControl fullWidth variant="outlined">
             <p>จำนวน</p>
             <TextField
+              label="กรุณากรอกจำนวน"
               id="Amount"
               name="Amount"
               variant="outlined"
@@ -432,7 +434,7 @@ function MedRecCreate() {
               กลับ
             </Button>
             <Button
-              style={{ float: "right" }}
+              style={{ float: "right" ,backgroundColor:"#626567" }}
               variant="contained"
               onClick={submit}
               color="primary"

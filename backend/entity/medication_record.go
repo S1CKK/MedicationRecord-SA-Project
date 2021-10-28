@@ -17,8 +17,8 @@ type MedicationRecord struct {
 	MedID *uint
 	Med   Medicine
 
-	TreatmentID    *uint
-	AdmissionID    *uint
-	Admission_Name string
-	Treatment      TreatmentRecord
+	TreatmentID *uint
+	AdmissionID *uint
+
+	Treatment TreatmentRecord
 }
