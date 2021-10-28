@@ -16,7 +16,6 @@ import { Button,Drawer } from "@material-ui/core";
 import clsx from "clsx"; 
 import HomeIcon from "@material-ui/icons/Home";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-//import YouTubeIcon from "@material-ui/icons/YouTube";
 import MedicationIcon from '@mui/icons-material/Medication';
 import NoteAltIcon from '@mui/icons-material/NoteAlt';
 
@@ -38,7 +37,7 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       display: "flex",
     },
-    nav : {background : "#239B56"},
+    nav : {background : "#626567"},
     title: {
       flexGrow: 1,
     },
@@ -130,7 +129,7 @@ function Navbar() {
 
   const menu = [
     { name: "หน้าแรก", icon: <HomeIcon />, path: "/" },
-    { name: "สมาชิก", icon: <AccountCircleIcon />, path: "/pharmacists" },
+    { name: "เภสัชกร", icon: <AccountCircleIcon />, path: "/pharmacists" },
     { name: "บันทึกการจ่ายยา", icon: <MedicationIcon />, path: "/medication_records" },
     { name: "สร้างบันทึกการจ่ายยา", icon: <NoteAltIcon />, path: "/medication_record/create" },
   ];
@@ -182,13 +181,16 @@ function Navbar() {
           >
             <MenuIcon />
           </IconButton>
+          <img src="/img/med-jar.png" width="50px"></img>
           <Typography variant="h6" className={classes.title}>
-            System Analysis and Design
+            ระบบบันทึกการจ่ายยา
           </Typography>
           <Typography variant="subtitle1" >
-            {pharmacist?.Name}
+            {pharmacist?.Name} &nbsp;&nbsp;       
           </Typography>
-          <Button color="inherit" onClick={signout}>
+          <Button /*color="inherit"*/ 
+          style={{backgroundColor:"#E5E7E9"}}
+          onClick={signout}>
             ออกจากระบบ
           </Button>
         </Toolbar>
