@@ -86,12 +86,12 @@ func SetupDatabase() {
 	}
 	db.Model(&Admission{}).Create(&ad3)
 
-	var admit1 Admission
+	/*var admit1 Admission
 	var admit2 Admission
 	var admit3 Admission
-	db.Raw("SELECT * FROM admissions WHERE patient_id=?", "I562").Scan(&admit1)
-	db.Raw("SELECT * FROM admissions WHERE patient_id=?", "I563").Scan(&admit2)
-	db.Raw("SELECT * FROM admissions WHERE patient_id=?", "I564").Scan(&admit3)
+	db.Raw("SELECT * FROM admissions WHERE patient_id=?", "I562").Scan(&ad1)
+	db.Raw("SELECT * FROM admissions WHERE patient_id=?", "I563").Scan(&ad2)
+	db.Raw("SELECT * FROM admissions WHERE patient_id=?", "I564").Scan(&ad3)*/
 
 	//TreatmentRecord
 	tr1 := TreatmentRecord{
@@ -102,7 +102,7 @@ func SetupDatabase() {
 		Cost:           50000,
 		Equipment_id:   002,
 		Med:            Medicine{},
-		Admission:      admit1,
+		Admission:      ad1,
 	}
 	db.Model(&TreatmentRecord{}).Create(&tr1)
 
@@ -114,7 +114,7 @@ func SetupDatabase() {
 		Cost:           50000,
 		Equipment_id:   001,
 		Med:            Medicine{},
-		Admission:      admit3,
+		Admission:      ad3,
 	}
 	db.Model(&TreatmentRecord{}).Create(&tr2)
 

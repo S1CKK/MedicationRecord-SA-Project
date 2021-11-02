@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       display: "flex",
     },
-    nav : {background : "#239B56"},
+    //nav : {background : "#239B56"},
     title: {
       flexGrow: 1,
     },
