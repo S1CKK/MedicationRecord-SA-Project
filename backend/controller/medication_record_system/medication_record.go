@@ -3,7 +3,7 @@ package controller
 import (
 	"net/http"
 
-	"github.com/S1CKK/med-record-system/entity"
+	"github.com/ProjectG10/entity"
 	"github.com/gin-gonic/gin"
 )
 
@@ -68,61 +68,10 @@ func GetMedicationRacord(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": medicationrecord})
 }
 
-/*
-// GET /medication_records
-func ListMedicationRacord(c *gin.Context) {
-	var medicationrecord []entity.MedicationRecord
-	var treatment []entity.TreatmentRecord
-
-	if err := entity.DB().Joins("Admission").
-		Find(&treatment).Where("").Error; err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "admission not found"})
-		return
-	}
-	if err := entity.DB().Preload("Treatment").Preload("Med").Preload("Pharma").Raw("SELECT * FROM medication_records").Find(&medicationrecord).Error; err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
-
-	c.JSON(http.StatusOK, gin.H{"data": medicationrecord})
-}*/
-
 // GET /medication_records
 func ListMedicationRacord(c *gin.Context) {
 	var medicationrecord []entity.MedicationRecord
 	if err := entity.DB().Preload("Treatment").Preload("Med").Preload("Pharma").Preload("Treatment.Admission").Raw("SELECT * FROM medication_records").Find(&medicationrecord).Error; err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
-
-	c.JSON(http.StatusOK, gin.H{"data": medicationrecord})
-}
-
-// DELETE /medication_records/:id
-func DeleteMedicationRacord(c *gin.Context) {
-	id := c.Param("id")
-	if tx := entity.DB().Exec("DELETE FROM medication_record WHERE id = ?", id); tx.RowsAffected == 0 {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "medication record not found"})
-		return
-	}
-
-	c.JSON(http.StatusOK, gin.H{"data": id})
-}
-
-// PATCH /medication_records
-func UpdateMedicationRacord(c *gin.Context) {
-	var medicationrecord entity.MedicationRecord
-	if err := c.ShouldBindJSON(&medicationrecord); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
-
-	if tx := entity.DB().Where("id = ?", medicationrecord.ID).First(&medicationrecord); tx.RowsAffected == 0 {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "medication record not found"})
-		return
-	}
-
-	if err := entity.DB().Save(&medicationrecord).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}

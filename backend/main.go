@@ -1,11 +1,22 @@
 package main
 
 import (
-	"github.com/S1CKK/med-record-system/controller"
+	actor "github.com/ProjectG10/controller/actor"
+	admission "github.com/ProjectG10/controller/admission"
+	admission_system "github.com/ProjectG10/controller/admission_system"
+	disease "github.com/ProjectG10/controller/disease"
+	equipment "github.com/ProjectG10/controller/equipment"
+	equipment_system "github.com/ProjectG10/controller/equipment_system"
+	food_system "github.com/ProjectG10/controller/food_system"
+	medication_record_system "github.com/ProjectG10/controller/medication_record_system"
+	medicine "github.com/ProjectG10/controller/medicine"
+	patient "github.com/ProjectG10/controller/patient"
+	payment_system "github.com/ProjectG10/controller/payment_system"
+	right_trearment "github.com/ProjectG10/controller/right_treatment"
+	treatment_record "github.com/ProjectG10/controller/treatment_record"
 
-	"github.com/S1CKK/med-record-system/entity"
-	"github.com/S1CKK/med-record-system/middlewares"
-
+	"github.com/ProjectG10/entity"
+	"github.com/ProjectG10/middlewares"
 	"github.com/gin-gonic/gin"
 )
 
@@ -20,50 +31,97 @@ func main() {
 	{
 		protected := api.Use(middlewares.Authorizes())
 		{
+			//routes admission--------major
+			protected.GET("/route/GetAdmission/:id", admission.GetAdmission)
+			protected.GET("/route/ListAdmission", admission.ListAdmission)
+			protected.POST("/route/CreatAdmission", admission.CreateAdmission)
+			//routes admission_system/roomtypes
+			protected.GET("/route/GetRoomType/:id", admission_system.GetRoomtype)
+			protected.GET("/route/ListRoomType", admission_system.ListRoomtypes)
+			//routes admission_system/room
+			protected.GET("/route/GetRoom/:id", admission_system.GetRoom)
+			protected.GET("/route/ListRoom", admission_system.ListRoom)
+			//route equipment
+			protected.GET("/route/GetEquipment/:id", equipment.GetEquipment)
+			protected.GET("/route/ListEquipment", equipment.ListEquipment)
+			//route equipment system/requisition--------major
+			protected.GET("/route/GetRequisition/:id", equipment_system.GetRequisitionRecord)
+			protected.GET("/route/ListRequisition", equipment.ListEquipment)
+			protected.POST("/route/CreatRequisition", equipment.CreateEquipment)
+			//route food_system/food allocate--------major
+			protected.GET("/route/GetFoodAllocate/:id", food_system.GetFoodallocate)
+			protected.GET("/route/ListFoodAllocate", food_system.ListFoodallocates)
+			protected.POST("/route/CreatFoodAllocate", food_system.CreateFoodallocate)
+			//route food_system/food set
+			protected.GET("/route/GetFoodSet/:id", food_system.GetFoodSet)
+			protected.GET("/route/ListFoodSet", food_system.ListFoodSets)
+			//route food_system/food time
+			protected.GET("/route/GetFoodTime/:id", food_system.GetFoodTime)
+			protected.GET("/route/ListFoodTime", food_system.ListFoodTimes)
+			//route medication_record_system-----------major
+			protected.GET("/route/GetMedRec/:id", medication_record_system.GetMedicationRacord)
+			protected.GET("/route/ListMedRec", medication_record_system.ListMedicationRacord)
+			protected.POST("/route/CreatMedRec", medication_record_system.CreateMedicationRecord)
+			//route medicine
+			protected.GET("/route/GetMedicine/:id", medicine.GetMedicine)
+			protected.GET("/route/ListMedicine", medicine.ListMedicine)
+			//route patient--------------major
+			protected.GET("/route/GetPatient/:id", patient.GetPatient)
+			protected.GET("/route/ListPatient", patient.ListPatients)
+			protected.POST("/route/CreatPatient", patient.CreatePatient)
+			//route disease
+			protected.GET("/route/GetDisease/:id", disease.GetDisease)
+			protected.GET("/route/ListDisease", disease.ListDiseases)
+			//route payment_system/bill-------------major
+			protected.GET("/route/GetBill/:id", payment_system.GetBill)
+			protected.GET("/route/ListBill", payment_system.ListBill)
+			protected.POST("/route/CreatBill", payment_system.CreateBill)
+			//route payment_system/payment
+			protected.GET("/route/GetPayment/:id", payment_system.GetPaymentMethod)
+			protected.GET("/route/ListPayment", payment_system.ListPaymentMethod)
+			//route right_treatment
+			protected.GET("/route/GetRightTreatment/:id", right_trearment.GetRightTreatment)
+			protected.GET("/route/ListRightTreatment", right_trearment.ListRightTreatment)
+			//route treatment_record_system------------major
+			protected.GET("/route/GetTreatmentRec/:id", treatment_record.GetTreatmentRecord)
+			protected.GET("/route/ListTreatmentRec", treatment_record.ListTreatmentRecord)
+			protected.POST("/route/CreatTreatmentRec", treatment_record.CreateTreatmentRecord)
+			//route role
 			// Pharmacist Routes
-			protected.GET("/pharmacists", controller.ListPharmacists)
-			protected.GET("/pharmacist/:id", controller.GetPharmacist)
-			protected.POST("/pharmacists", controller.CreatePharmacist)
-			//protected.PATCH("/pharmacists", controller.UpdatePharmacist)
-			//protected.DELETE("/pharmacists/:id", controller.DeletePharmacist)
-
-			// Medicine Routes
-			protected.GET("/medicines", controller.ListMedicine)
-			protected.GET("/medicine/:id", controller.GetMedicine)
-			protected.POST("/medicines", controller.CreateMedicine)
-			//protected.PATCH("/medicines", controller.UpdateMedicine)
-			//protected.DELETE("/medicines/:id", controller.DeleteMedicine)
-
-			// Admission Routes
-			protected.GET("/admissions", controller.ListAdmission)
-			protected.GET("/admission/:id", controller.GetAdmission)
-			//protected.GET("/admission/watched/user/:id", controller.GetPlaylistWatchedByUser)
-			protected.POST("/admissions", controller.CreateAdmission)
-			//protected.PATCH("/admissions", controller.UpdateAdmission)
-			//protected.DELETE("/admissions/:id", controller.DeleteAdmission)
-
-			// Treatment Routes
-			protected.GET("/treatment_records", controller.ListTreatmentRecord)
-			protected.GET("/admission/treatments", controller.AdmissionByTreatment)
-			protected.GET("/treatment_record/:id", controller.GetTreatmentRecord)
-			protected.POST("/treatment_records", controller.CreateTreatmentRecord)
-			//protected.PATCH("/treatment_records", controller.UpdateTreatmentRecord)
-			//protected.DELETE("/treatments_records/:id", controller.DeleteTreatmentRecord)
-
-			// MedRecord Routes
-			protected.GET("/medication_records", controller.ListMedicationRacord)
-			protected.GET("/medication_record/:id", controller.GetMedicationRacord)
-			protected.POST("/medication_records", controller.CreateMedicationRecord)
-			//protected.PATCH("/medication_records", controller.UpdateMedicationRacord)
-			//protected.DELETE("/medication_records/:id", controller.DeleteMedicationRacord)
-
+			protected.GET("/route/ListPharmacist", actor.ListPharmacists)
+			protected.GET("/route/GetPharmacist/:id", actor.GetPharmacist)
+			protected.POST("/route/CreatePharmacist", actor.CreatePharmacist)
+			// Nurse Routes
+			protected.GET("/route/ListNurse", actor.ListNurses)
+			protected.GET("/route/GetNurse/:id", actor.GetNurse)
+			protected.POST("/route/CreateNurse", actor.CreateNurse)
+			// Doctor Routes
+			protected.GET("/route/ListDoctor", actor.ListDoctors)
+			protected.GET("/route/GetDoctor/:id", actor.GetDoctor)
+			protected.POST("/route/CreateDoctor", actor.CreateDoctor)
+			// Nutritionist Routes
+			protected.GET("/route/ListNutritionist", actor.ListNutritionists)
+			protected.GET("/route/GetNutritionist/:id", actor.GetNutritionist)
+			protected.POST("/route/CreateNutritionist", actor.CreateNutritionist)
+			// FinancialOfficer Routes
+			protected.GET("/route/ListFinancialOfficer", actor.ListFinancialOfficer)
+			protected.GET("/route/GetFinancialOfficer/:id", actor.GetFinancialOfficer)
+			protected.POST("/route/CreateFinancialOfficer", actor.CreateFinancialOfficer)
 		}
 	}
-	// Pharmacist Routes
-	r.POST("/pharmacists/create", controller.CreatePharmacist)
+	// Actor Routes
+	r.POST("/pharmacists/create", actor.CreatePharmacist)
+	r.POST("/nurses/create", actor.CreatePharmacist)
+	r.POST("/financialofficers/create", actor.CreatePharmacist)
+	r.POST("/nutritionists/create", actor.CreatePharmacist)
+	r.POST("/doctors/create", actor.CreatePharmacist)
 
-	// Authentication Routes
-	r.POST("/login", controller.Login)
+	// Login/Actor
+	r.POST("/login/pharmacist", actor.LoginPharmacist)
+	r.POST("/login/nurse", actor.LoginNurse)
+	r.POST("/login/financialofficer", actor.LoginFinancialOfficer)
+	r.POST("/login/nutritionist", actor.LoginNurse)
+	r.POST("/login/doctor", actor.LoginDoctor)
 
 	// Run the server
 	r.Run()
