@@ -46,8 +46,8 @@ func main() {
 			protected.GET("/route/ListEquipment", equipment.ListEquipment)
 			//route equipment system/requisition--------major
 			protected.GET("/route/GetRequisition/:id", equipment_system.GetRequisitionRecord)
-			protected.GET("/route/ListRequisition", equipment.ListEquipment)
-			protected.POST("/route/CreatRequisition", equipment.CreateEquipment)
+			protected.GET("/route/ListRequisition", equipment_system.ListRequisitionRecord)
+			protected.POST("/route/CreatRequisition", equipment_system.CreateRequisitionRecord)
 			//route food_system/food allocate--------major
 			protected.GET("/route/GetFoodAllocate/:id", food_system.GetFoodallocate)
 			protected.GET("/route/ListFoodAllocate", food_system.ListFoodallocates)
