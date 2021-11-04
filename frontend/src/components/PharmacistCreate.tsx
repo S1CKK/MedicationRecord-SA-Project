@@ -64,7 +64,7 @@ function PharmacistCreate() {
       Password: pharmacist.Password ?? "",
     };
 
-    const apiUrl = "http://localhost:8080/pharmacists";
+    const apiUrl = "http://localhost:8080/route/CreatePharmacist";
     const requestOptions = {
       method: "POST",
       headers: {

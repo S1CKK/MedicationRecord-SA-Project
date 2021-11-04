@@ -113,7 +113,7 @@ function MedRecCreate() {
 
   const getPharmacist = async () => {
     const uid = Number(localStorage.getItem("uid"));
-    fetch(`${apiUrl}/pharmacist/${uid}`, requestOptions)
+    fetch(`${apiUrl}/route/GetPharmacist/${uid}`, requestOptions)
       .then((response) => response.json())
       .then((res) => {
         if (res.data) {
@@ -125,7 +125,7 @@ function MedRecCreate() {
   };
 
   const getMedicine = async () => {
-    fetch(`${apiUrl}/medicines`, requestOptions)
+    fetch(`${apiUrl}/route/ListMedicine`, requestOptions)
       .then((response) => response.json())
       .then((res) => {
         if (res.data) {
@@ -135,42 +135,9 @@ function MedRecCreate() {
         }
       });
   };
-  /*
-  const getTreatment = async () => {
-    var tmpTreat =treatments;
-    fetch(`${apiUrl}/treatment_records`, requestOptions)
-      .then((response) => response.json())
-      .then((res) => {
-        if (res.data) {
-          console.log("Here is the treatment data");
-          console.log(res.data);
-          //setTreatments(res.data);
-          tmpTreat = res.data;
-        } else {
-          console.log("else");
-        }
-      });
-      fetch(`${apiUrl}/admissions`, requestOptions)
-      .then((response) => response.json())
-      .then((res) => {
-        if(res.data){
-          console.log("here is a tmptreat");
-          console.log(tmpTreat);
-          var newTmp = tmpTreat.map((item,index) => {
-            item.Admission = res.data[index];
-            return item;
-          });
-          console.log("here is a newtmp");
-          console.log(newTmp);
-          setTreatments(newTmp);
-        }else{
-            console.log("error admission");
-        }
-      })
-  };*/
   
   const getTreatment= async () => {
-    fetch(`${apiUrl}/admission/treatments`, requestOptions)
+    fetch(`${apiUrl}/route/ListTreatmentRec`, requestOptions)
       .then((response) => response.json())
       .then((res) => {
         if (res.data) {
@@ -182,7 +149,7 @@ function MedRecCreate() {
   };
 
   const getAdmission= async () => {
-    fetch(`${apiUrl}/admissions`, requestOptions)
+    fetch(`${apiUrl}/route/ListAdmission`, requestOptions)
       .then((response) => response.json())
       .then((res) => {
         if (res.data) {
@@ -244,7 +211,7 @@ function MedRecCreate() {
       body: JSON.stringify(data),
     };
 
-    fetch(`${apiUrl}/medication_records`, requestOptionsPost)
+    fetch(`${apiUrl}/route/CreatMedRec`, requestOptionsPost)
       .then((response) => response.json())
       .then((res) => {
         if (res.data) {
@@ -321,8 +288,8 @@ function MedRecCreate() {
                
                 {treatments.map((item: TreatmentInterface) => (
                   <option value={item.ID} key={item.ID}>
-                    {item.ID}   {item.Admission.PatientID}  {item.Admission.Patient_Name}
-                  </option>
+                    {item.ID}   {item.Admission.PatientID}   {item.Admission.PatientName}
+                  </option> 
                 ))}
               </Select>
             </FormControl>
@@ -343,7 +310,7 @@ function MedRecCreate() {
                 </option>
                 {medicines.map((item: MedicineInterface) => (
                   <option value={item.ID} key={item.ID}>
-                    {item.Name}
+                    {item.Med_name}
                   </option>
                 ))}
               </Select>

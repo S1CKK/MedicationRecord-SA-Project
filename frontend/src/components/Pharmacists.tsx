@@ -33,7 +33,7 @@ function Pharmacists() {
   const [users, setUsers] = useState<PharmacistInterface[]>([]);
 
   const getUsers = async () => {
-    const apiUrl = "http://localhost:8080/pharmacists";
+    const apiUrl = "http://localhost:8080/route/ListPharmacist";
     const requestOptions = {
       method: "GET",
       headers: {

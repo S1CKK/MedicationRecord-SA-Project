@@ -69,7 +69,7 @@ func CreateTreatmentRecord(c *gin.Context) {
 func GetTreatmentRecord(c *gin.Context) {
 	var treatmentrecord entity.TreatmentRecord
 	id := c.Param("id")
-	if err := entity.DB().Preload("Admission").Preload("Doctor").Preload("Medicine").Preload("Equipment").Raw("SELECT * FROM treatment_records WHERE id = ?", id).Find(&treatmentrecord).Error; err != nil {
+	if err := entity.DB().Preload("Admission").Preload("Doctor").Preload("Med").Preload("Equipment").Raw("SELECT * FROM treatment_records WHERE id = ?", id).Find(&treatmentrecord).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -79,7 +79,7 @@ func GetTreatmentRecord(c *gin.Context) {
 // GET /treatmentrecord
 func ListTreatmentRecord(c *gin.Context) {
 	var treatmentrecord []entity.TreatmentRecord
-	if err := entity.DB().Preload("Admission").Preload("Doctor").Preload("Medicine").Preload("Equipment").Raw("SELECT * FROM treatment_records").Find(&treatmentrecord).Error; err != nil {
+	if err := entity.DB().Preload("Admission").Preload("Doctor").Preload("Med").Preload("Equipment").Raw("SELECT * FROM treatment_records").Find(&treatmentrecord).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -117,18 +117,4 @@ func DeleteTreatmentRecord(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{"data": id})
-}
-
-//เก็บไว้พิจารณา
-// GET /admission/treatments
-func AdmissionByTreatment(context *gin.Context) {
-	var treatment []entity.TreatmentRecord
-
-	if err := entity.DB().Joins("Admission").
-		Find(&treatment).Where("").Error; err != nil {
-		context.JSON(http.StatusBadRequest, gin.H{"error": "admission not found"})
-		return
-	}
-
-	context.JSON(http.StatusOK, gin.H{"data": treatment})
 }

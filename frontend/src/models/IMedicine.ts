@@ -1,5 +1,5 @@
 export interface MedicineInterface {
     ID: number, 
-    Name: string;   
-    Type: string;
+    Med_name: string;   
+    Med_type: string;
 }

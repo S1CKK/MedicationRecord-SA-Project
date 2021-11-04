@@ -47,7 +47,7 @@ function SignIn() {
   const [error, setError] = useState(false);
 
   const login = () => {
-    const apiUrl = "http://localhost:8080/login";
+    const apiUrl = "http://localhost:8080/login/pharmacist";
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },

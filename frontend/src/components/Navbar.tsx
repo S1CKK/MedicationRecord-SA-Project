@@ -144,7 +144,7 @@ function Navbar() {
  
   const getPharmacist = async () => {
     const uid = Number(localStorage.getItem("uid"));
-    fetch(`${apiUrl}/pharmacist/${uid}`, requestOptions)
+    fetch(`${apiUrl}/route/GetPharmacist/${uid}`, requestOptions)
       .then((response) => response.json())
       .then((res) => {
         if (res.data) {

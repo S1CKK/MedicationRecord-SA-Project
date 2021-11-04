@@ -44,7 +44,7 @@ function MedRecs() {
   };
 
   const getMedRecords = async () => {
-    fetch(`${apiUrl}/medication_records`, requestOptions)
+    fetch(`${apiUrl}/route/ListMedRec`, requestOptions)
       .then((response) => response.json())
       .then((res) => {
         console.log(res.data);
@@ -115,8 +115,8 @@ function MedRecs() {
                 <TableRow key={item.ID}>
                   <TableCell align="center">{item.ID}</TableCell>
                   <TableCell align="center">{item.Pharma.Name}</TableCell>
-                  <TableCell align="center">{item.TreatmentID}  {item.Treatment.Admission.PatientID} {item.Treatment.Admission.Patient_Name}</TableCell>
-                  <TableCell align="center">{item.Med.Name}</TableCell>
+                  <TableCell align="center">{item.TreatmentID}  {item.Treatment.Admission.PatientID} {item.Treatment.Admission.PatientName}</TableCell>
+                  <TableCell align="center">{item.Med.Med_name}</TableCell>
                   <TableCell align="center">{item.Amount}</TableCell>
                   <TableCell align="center">{format((new Date(item.RecordTime)), 'dd MMMM yyyy hh:mm a')}</TableCell>
                 </TableRow>
