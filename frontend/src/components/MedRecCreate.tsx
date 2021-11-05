@@ -243,6 +243,7 @@ function MedRecCreate() {
               component="h2"
               variant="h6"
               color="primary"
+              style={{color:"black"}}
               gutterBottom
             >
               บันทึกการจ่ายยา

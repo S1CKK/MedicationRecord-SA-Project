@@ -69,6 +69,7 @@ function MedRecs() {
               component="h2"
               variant="h6"
               color="primary"
+              style={{color:"black"}}
               gutterBottom
             >
               ข้อมูลการจ่ายยา
