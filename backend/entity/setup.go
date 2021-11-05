@@ -276,7 +276,7 @@ func SetupDatabase() {
 	}
 	db.Model(&Foodset{}).Create(&set2)
 	set3 := Foodset{
-		Foodmenu:  "งดอหาร",
+		Foodmenu:  "งดอาหาร",
 		Fooddrink: "นม",
 		Setprice:  "10",
 	}

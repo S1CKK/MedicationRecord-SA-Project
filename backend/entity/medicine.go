@@ -8,7 +8,7 @@ type Medicine struct {
 	gorm.Model
 	Med_name  string
 	Med_type  string
-	Med_price uint
+	Med_price int
 
 	Patients          []Patient          `gorm:"foreignKey:MedID"`
 	TreatmentRecords  []TreatmentRecord  `gorm:"foreignKey:MedID"`
