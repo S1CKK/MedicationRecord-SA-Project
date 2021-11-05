@@ -95,7 +95,7 @@ function SignIn() {
       </Snackbar>
       <Snackbar open={error} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="error">
-          อีเมลหรือรหัสผ่านไม่ถูกต้อง
+          หมายเลขบัตรประชาชนหรือรหัสผ่านไม่ถูกต้อง
         </Alert>
       </Snackbar>
       <CssBaseline />
